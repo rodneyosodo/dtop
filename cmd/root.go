@@ -4,7 +4,9 @@ import (
 	"os"
 	"time"
 
+	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/log"
+	"github.com/rodneyosodo/dtop/tui"
 	"github.com/spf13/cobra"
 )
 
@@ -37,8 +39,15 @@ func Execute() {
 	}
 }
 
-func run(cmd *cobra.Command, args []string) error {
-	logger.Infof("Starting %s", appName)
+func run(cmd *cobra.Command, _ []string) error {
+	m, err := tui.NewModel(cmd.Context())
+	if err != nil {
+		return err
+	}
+
+	if _, err := tea.NewProgram(m, tea.WithAltScreen(), tea.WithContext(cmd.Context())).Run(); err != nil {
+		logger.Fatal(err)
+	}
 
 	return nil
 }
