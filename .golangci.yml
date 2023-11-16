@@ -1,0 +1,104 @@
+# Copyright (c) 2023 0x6flab
+#
+# SPDX-License-Identifier: GPL-3.0-only
+#
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation, version 3.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY
+# WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE. See the GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along with
+# this program. If not, see <https://www.gnu.org/licenses/>.
+
+run:
+  concurrency: 4
+  timeout: 1m
+  issues-exit-code: 1
+  tests: true
+
+linters:
+  disable-all: true
+  fast: true
+  enable:
+    - goheader
+    - godot
+    - errcheck
+    - gosimple
+    - govet
+    - ineffassign
+    - staticcheck
+    - typecheck
+    - unused
+    - bodyclose
+    - durationcheck
+    - exhaustive
+    - goconst
+    - misspell
+    - makezero
+    - nakedret
+    - nestif
+    - nilerr
+    - nilnil
+    - rowserrcheck
+    - stylecheck
+    - tenv
+    - unconvert
+    - unparam
+    - wastedassign
+    - containedctx
+    - revive
+    - gocritic
+    - whitespace
+    - errorlint
+    - contextcheck
+    - dogsled
+    - errname
+    - funlen
+    - gci
+    - goerr113
+    - gofmt
+    - gofumpt
+    - goimports
+    - loggercheck
+    - nilnil
+    - nilerr
+    - nlreturn
+
+linters-settings:
+  goheader:
+    values:
+      const:
+        COMPANY: 0x6flab
+    template: |-
+      Copyright (c) {{ YEAR }} {{ COMPANY }}
+
+      SPDX-License-Identifier: GPL-3.0-only
+
+      This program is free software: you can redistribute it and/or modify it under
+      the terms of the GNU General Public License as published by the Free Software
+      Foundation, version 3.
+
+      This program is distributed in the hope that it will be useful, but WITHOUT ANY
+      WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+      PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+      You should have received a copy of the GNU General Public License along with
+      this program. If not, see <https://www.gnu.org/licenses/>.
+  funlen:
+    lines: -1
+    statements: -1
+
+  cyclop:
+    max-complexity: 10
+
+  dupl:
+    threshold: 100
+
+  gocritic:
+    enabled-tags:
+      - performance
+    disabled-tags:
+      - experimental
