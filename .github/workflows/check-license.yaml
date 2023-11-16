@@ -32,12 +32,12 @@ jobs:
 
       - name: Check License Header
         run: |
-          CHECK=$(grep -rcL --exclude-dir={.git,build} \
+          CHECK=$(grep -rL --exclude-dir={.git,build} \
             --exclude=\*.{md,mod,sum,gitignore} \
             --exclude=LICENSE \
             --regexp "Copyright (c) 2023 0x6flab" .)
           if [ "$CHECK" ]; then
             echo "License header check failed. Fix the following files:"
-            echo "$CHECK"
+            echo "$CHECK" | xargs -n 1 echo "  -"
             exit 1
           fi
