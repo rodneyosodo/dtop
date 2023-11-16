@@ -45,12 +45,12 @@ type Model struct {
 func NewModel(ctx context.Context) (*Model, error) {
 	client, err := client.NewClientWithOpts(client.FromEnv)
 	if err != nil {
-		return &Model{}, err
+		return nil, err
 	}
 
 	containerTable, err := views.ListContainers(ctx, client)
 	if err != nil {
-		return &Model{}, err
+		return nil, err
 	}
 
 	return &Model{
