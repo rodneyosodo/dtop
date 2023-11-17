@@ -1,18 +1,3 @@
-// Copyright (c) 2023 0x6flab
-//
-// SPDX-License-Identifier: GPL-3.0-only
-//
-// This program is free software: you can redistribute it and/or modify it under
-// the terms of the GNU General Public License as published by the Free Software
-// Foundation, version 3.
-//
-// This program is distributed in the hope that it will be useful, but WITHOUT ANY
-// WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
-// PARTICULAR PURPOSE. See the GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License along with
-// this program. If not, see <https://www.gnu.org/licenses/>.
-
 package views
 
 import (
@@ -21,11 +6,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/0x6flab/dtop/tui/styles"
 	"github.com/charmbracelet/bubbles/table"
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/client"
 	"github.com/dustin/go-humanize"
+	"github.com/rodneyosodo/dtop/tui/styles"
 )
 
 func ListContainers(ctx context.Context, client *client.Client) (table.Model, error) {
@@ -35,7 +20,7 @@ func ListContainers(ctx context.Context, client *client.Client) (table.Model, er
 	}
 
 	columns := []table.Column{
-		{Title: "Container ID", Width: 15},
+		{Title: "Conatiner ID", Width: 15},
 		{Title: "Name", Width: 30},
 		{Title: "Image", Width: 40},
 		{Title: "Command", Width: 30},
@@ -44,20 +29,20 @@ func ListContainers(ctx context.Context, client *client.Client) (table.Model, er
 		{Title: "Ports", Width: 70},
 	}
 
-	rows := []table.Row{}
-	for i := range containers {
-		if len(containers[i].Names) == 0 {
+	var rows = []table.Row{}
+	for _, container := range containers {
+		if len(container.Names) == 0 {
 			continue
 		}
 
 		rows = append(rows, table.Row{
-			containers[i].ID[:12],
-			containers[i].Names[0][1:],
-			containers[i].Image,
-			containers[i].Command,
-			humanize.Time(time.Unix(containers[i].Created, 0)),
-			containers[i].State,
-			formatPorts(containers[i].Ports),
+			container.ID[:12],
+			container.Names[0][1:],
+			container.Image,
+			container.Command,
+			humanize.Time(time.Unix(container.Created, 0)),
+			container.State,
+			formatPorts(container.Ports),
 		})
 	}
 
@@ -84,32 +69,31 @@ func ListImages(ctx context.Context, client *client.Client) (table.Model, error)
 		{Title: "Size", Width: 10},
 	}
 
-	rows := []table.Row{}
-	for i := range images {
-		if len(images[i].RepoTags) == 0 {
+	var rows = []table.Row{}
+	for _, image := range images {
+		if len(image.RepoTags) == 0 {
 			continue
 		}
 
-		if len(images[i].RepoTags) > 1 {
-			for _, tag := range images[i].RepoTags {
+		if len(image.RepoTags) > 1 {
+			for _, tag := range image.RepoTags {
 				rows = append(rows, table.Row{
-					strings.SplitAfter(images[i].ID, ":")[1][:12],
+					strings.SplitAfter(image.ID, ":")[1][:12],
 					strings.Split(tag, ":")[0],
 					strings.SplitAfter(tag, ":")[1],
-					humanize.Time(time.Unix(images[i].Created, 0)),
-					humanize.Bytes(uint64(images[i].Size)),
+					humanize.Time(time.Unix(image.Created, 0)),
+					humanize.Bytes(uint64(image.Size)),
 				})
 			}
-
 			continue
 		}
 
 		rows = append(rows, table.Row{
-			strings.SplitAfter(images[i].ID, ":")[1][:12],
-			strings.Split(images[i].RepoTags[0], ":")[0],
-			strings.SplitAfter(images[i].RepoTags[0], ":")[1],
-			humanize.Time(time.Unix(images[i].Created, 0)),
-			humanize.Bytes(uint64(images[i].Size)),
+			strings.SplitAfter(image.ID, ":")[1][:12],
+			strings.Split(image.RepoTags[0], ":")[0],
+			strings.SplitAfter(image.RepoTags[0], ":")[1],
+			humanize.Time(time.Unix(image.Created, 0)),
+			humanize.Bytes(uint64(image.Size)),
 		})
 	}
 
@@ -128,6 +112,5 @@ func formatPorts(ports []types.Port) string {
 	for _, port := range ports {
 		portsStr += fmt.Sprintf("%d/%s ", port.PrivatePort, port.Type)
 	}
-
 	return portsStr
 }

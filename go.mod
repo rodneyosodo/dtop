@@ -1,4 +1,4 @@
-module github.com/0x6flab/dtop
+module github.com/rodneyosodo/dtop
 
 go 1.21.4
 
