@@ -1,0 +1,61 @@
+# Copyright (c) 2023 0x6flab
+#
+# SPDX-License-Identifier: GPL-3.0-only
+#
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation, version 3.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY
+# WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE. See the GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along with
+# this program. If not, see <https://www.gnu.org/licenses/>.
+
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "sunday"
+      time: "06:00"
+      timezone: "Africa/Nairobi"
+    assignees:
+      - "rodneyosodo"
+    reviewers:
+      - "rodneyosodo"
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+
+  - package-ecosystem: "gomod"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "sunday"
+      time: "06:00"
+      timezone: "Africa/Nairobi"
+    assignees:
+      - "rodneyosodo"
+    reviewers:
+      - "rodneyosodo"
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+
+  - package-ecosystem: "docker"
+    directory: "./docker"
+    schedule:
+      interval: "weekly"
+      day: "sunday"
+      time: "06:00"
+      timezone: "Africa/Nairobi"
+    assignees:
+      - "rodneyosodo"
+    reviewers:
+      - "rodneyosodo"
+    commit-message:
+      prefix: "chore"
+      include: "scope"
