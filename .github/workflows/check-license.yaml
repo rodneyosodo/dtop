@@ -1,0 +1,43 @@
+# Copyright (c) 2023 0x6flab
+#
+# SPDX-License-Identifier: GPL-3.0-only
+#
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation, version 3.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY
+# WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE. See the GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along with
+# this program. If not, see <https://www.gnu.org/licenses/>.
+
+name: Check License Header
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  check-license:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check License Header
+        run: |
+          CHECK=$(grep -rL --exclude-dir={.git,build} \
+            --exclude=\*.{md,mod,sum,gitignore} \
+            --exclude=LICENSE \
+            --regexp "Copyright (c) 2023 0x6flab" .)
+          if [ "$CHECK" ]; then
+            echo "License header check failed. Fix the following files:"
+            echo "$CHECK" | xargs -n 1 echo "  -"
+            exit 1
+          fi
