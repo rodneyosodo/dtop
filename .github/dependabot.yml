@@ -44,18 +44,3 @@ updates:
     commit-message:
       prefix: "chore"
       include: "scope"
-
-  - package-ecosystem: "docker"
-    directory: "./docker"
-    schedule:
-      interval: "monthly"
-      day: "sunday"
-      time: "06:00"
-      timezone: "Africa/Nairobi"
-    assignees:
-      - "rodneyosodo"
-    reviewers:
-      - "rodneyosodo"
-    commit-message:
-      prefix: "chore"
-      include: "scope"
