@@ -1,6 +1,6 @@
 module github.com/0x6flab/dtop
 
-go 1.21.4
+go 1.19
 
 require (
 	github.com/charmbracelet/bubbles v0.16.1
