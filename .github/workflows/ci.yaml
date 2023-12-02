@@ -41,6 +41,7 @@ jobs:
           go-version: ${{ matrix.go }}
 
       - name: Check linting
+        if: matrix.os == 'ubuntu-latest' && matrix.go == '1.21'
         uses: golangci/golangci-lint-action@v3
         with:
           skip-cache: true
