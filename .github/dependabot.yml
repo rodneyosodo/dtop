@@ -18,7 +18,7 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "monthly"
       day: "sunday"
       time: "06:00"
       timezone: "Africa/Nairobi"
@@ -33,7 +33,7 @@ updates:
   - package-ecosystem: "gomod"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "monthly"
       day: "sunday"
       time: "06:00"
       timezone: "Africa/Nairobi"
@@ -48,7 +48,7 @@ updates:
   - package-ecosystem: "docker"
     directory: "./docker"
     schedule:
-      interval: "weekly"
+      interval: "monthly"
       day: "sunday"
       time: "06:00"
       timezone: "Africa/Nairobi"
