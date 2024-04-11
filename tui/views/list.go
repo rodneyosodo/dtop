@@ -24,12 +24,13 @@ import (
 	"github.com/0x6flab/dtop/tui/styles"
 	"github.com/charmbracelet/bubbles/table"
 	"github.com/docker/docker/api/types"
+	"github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/client"
 	"github.com/dustin/go-humanize"
 )
 
 func ListContainers(ctx context.Context, client *client.Client) (table.Model, error) {
-	containers, err := client.ContainerList(ctx, types.ContainerListOptions{})
+	containers, err := client.ContainerList(ctx, container.ListOptions{})
 	if err != nil {
 		return table.Model{}, err
 	}
