@@ -42,7 +42,7 @@ jobs:
 
       - name: Check linting
         if: matrix.os == 'ubuntu-latest' && matrix.go == '1.21'
-        uses: golangci/golangci-lint-action@v5
+        uses: golangci/golangci-lint-action@v6
         with:
           skip-cache: true
 
