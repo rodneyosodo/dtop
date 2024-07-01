@@ -9,7 +9,7 @@ require (
 	github.com/charmbracelet/log v0.4.0
 	github.com/docker/docker v25.0.3+incompatible
 	github.com/dustin/go-humanize v1.0.1
-	github.com/spf13/cobra v1.8.0
+	github.com/spf13/cobra v1.8.1
 )
 
 require (
